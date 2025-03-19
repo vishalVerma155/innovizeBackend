@@ -50,7 +50,7 @@ const updateVideoLink = async(req, res) =>{
         const videoId = req.params.id;
         const {link} = req.body;
 
-        const updatedVideoLink = await Video.findByIdAndUpdate(videoId);
+        const updatedVideoLink = await Video.findByIdAndUpdate(videoId, {link}, {new : true});
 
         if (!updatedVideoLink) {
             return res.status(404).json({success: false, message: "Video not found" });
