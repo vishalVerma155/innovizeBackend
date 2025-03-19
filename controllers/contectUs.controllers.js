@@ -1,19 +1,67 @@
 const ContactUs = require('../models/contectUs.model.js');
 
-const createContectUs = async (req, res) => {
+const createContectDetail = async (req, res) => {
     try {
         const { fullName, businessName, email, contactNumber, message } = req.body;
 
-        if (!fullName || !email ||  !message) {
-            return res.status(400).json({ message: "All fields are required" });
+        if (!fullName || !email || !message) {
+            return res.status(400).json({ success: false, error: "Full name, email and message are required" });
         }
 
-        const newContact = new ContactUs({ fullName, businessName, email, contactNumber, message });
+        const newContact = new ContactUs({
+            fullName,
+            businessName: businessName ? businessName : "undefine",
+            email: email ? email : "undefine",
+            contactNumber: contactNumber ? contactNumber : "undefine",
+            message
+        });
         await newContact.save();
 
-        return res.status(201).json({ message: "Message sent successfully", contact: newContact });
+        if (!newContact) {
+            return res.status(400).json({ success: false, error: "Contect deatails not saved." });
+        }
+
+        return res.status(201).json({ success: true, message: "Message sent successfully", contactDetails: newContact });
     } catch (error) {
-        res.status(500).json({ message: "Server error", error: error.message });
+        return res.status(500).json({ success: false, error: error.message });
+    }
+}
+
+const getAllContectDetails = async (req, res) => {
+    try {
+        const contacts = await ContactUs.find().sort({ createdAt: -1 }); // Latest messages first
+
+        return res.status(201).json({ success: true, message: "all contect fetched successfully", allcontact: contacts });
+    } catch (error) {
+        return res.status(500).json({ success: false, error: error.message });
+    }
+}
+
+const getContectDetailById = async (req, res) => {
+    try {
+        const contact = await ContactUs.findById(req.params.id);
+
+        if (!contact) {
+            return res.status(404).json({ success: false, message: "Contect detail not found" });
+        }
+
+        return res.status(201).json({ success: true, message: " contect  detail fetched successfully", contact });
+    } catch (error) {
+        return res.status(500).json({ success: false, error: error.message });
+    }
+}
+
+const deleteContectDetail = async (req, res) => {
+    try {
+        const contact = await ContactUs.findByIdAndDelete(req.params.id);
+
+        if (!contact) {
+            return res.status(404).json({ success: false, message: "Contect detail not found" });
+        }
+
+        return res.status(201).json({ success: true, message: " contect  detail deleted successfully successfully", contact });
+    } catch (error) {
+        return res.status(500).json({ success: false, error: error.message });
     }
 }
 
