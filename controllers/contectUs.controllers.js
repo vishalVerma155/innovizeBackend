@@ -43,7 +43,7 @@ const getContectDetailById = async (req, res) => {
         const contact = await ContactUs.findById(req.params.id);
 
         if (!contact) {
-            return res.status(404).json({ success: false, message: "Contect detail not found" });
+            return res.status(404).json({ success: false, error: "Contect detail not found" });
         }
 
         return res.status(201).json({ success: true, message: " contect  detail fetched successfully", contact });
@@ -57,7 +57,7 @@ const deleteContectDetail = async (req, res) => {
         const contact = await ContactUs.findByIdAndDelete(req.params.id);
 
         if (!contact) {
-            return res.status(404).json({ success: false, message: "Contect detail not found" });
+            return res.status(404).json({ success: false, error: "Contect detail not found" });
         }
 
         return res.status(201).json({ success: true, message: " contect  detail deleted  successfully", deletedcontact : contact});
