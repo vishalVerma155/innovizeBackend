@@ -45,6 +45,23 @@ const getVideoById = async(req, res) =>{
     }
 }
 
+const updateVideoLink = async(req, res) =>{
+    try {
+        const videoId = req.params.id;
+        const {link} = req.body;
+
+        const updatedVideoLink = await Video.findByIdAndUpdate(videoId);
+
+        if (!updatedVideoLink) {
+            return res.status(404).json({success: false, message: "Video not found" });
+        }
+        return res.status(201).json({ success: true, message: "Video link updated successfully", updatedVideoLink });
+
+    } catch (error) {
+        return res.status(500).json({ success: false, error: error.message });
+    }
+}
+
 const deleteVideo = async(req, res) =>{
     try {
         const video = await Video.findByIdAndDelete(req.params.id);
@@ -58,4 +75,4 @@ const deleteVideo = async(req, res) =>{
     }
 }
 
-module.exports = { createVideo, deleteVideo, getAllVideo, getVideoById };
+module.exports = { createVideo, deleteVideo, getAllVideo, getVideoById, updateVideoLink };

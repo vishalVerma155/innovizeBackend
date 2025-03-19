@@ -10,9 +10,9 @@ const createContectDetail = async (req, res) => {
 
         const newContact = new ContactUs({
             fullName,
-            businessName: businessName ? businessName : "undefine",
-            email: email ? email : "undefine",
-            contactNumber: contactNumber ? contactNumber : "undefine",
+            businessName: businessName ? businessName : 'undefined',
+            email: email ? email : 'undefined',
+            contactNumber: contactNumber ? contactNumber : 'undefined',
             message
         });
         await newContact.save();
@@ -21,6 +21,7 @@ const createContectDetail = async (req, res) => {
             return res.status(400).json({ success: false, error: "Contect deatails not saved." });
         }
 
+        undefined
         return res.status(201).json({ success: true, message: "Message sent successfully", contactDetails: newContact });
     } catch (error) {
         return res.status(500).json({ success: false, error: error.message });
@@ -59,10 +60,10 @@ const deleteContectDetail = async (req, res) => {
             return res.status(404).json({ success: false, message: "Contect detail not found" });
         }
 
-        return res.status(201).json({ success: true, message: " contect  detail deleted successfully successfully", contact });
+        return res.status(201).json({ success: true, message: " contect  detail deleted  successfully", deletedcontact : contact});
     } catch (error) {
         return res.status(500).json({ success: false, error: error.message });
     }
 }
 
-module.exports = { createContectUs };
+module.exports = {  createContectDetail, getAllContectDetails, getContectDetailById, deleteContectDetail };
