@@ -8,18 +8,14 @@ const contactUsSchema = new mongoose.Schema({
     },
     businessName: {
         type: String,
-        required: true,
         trim: true
     },
     email: {
         type: String,
-        required: true,
         trim: true,
-        lowercase: true
     },
     contactNumber: {
         type: String,
-        required: true,
         trim: true
     },
     message: {
