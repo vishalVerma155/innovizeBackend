@@ -1,0 +1,1 @@
+const ContactUs = require('../models/contectUs.model.js');

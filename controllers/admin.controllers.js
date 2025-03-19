@@ -57,4 +57,20 @@ const login = async(req, res) =>{
 
 }
 
-module.exports = {login};
+const getAdmin = async(req, res) =>{
+   
+    try {
+        const adminId = req.user._id;
+        const admin = await Admin.findById(adminId).select("-password");
+
+        if (!admin) {
+            return res.status(404).json({ message: "Admin not found" });
+        }
+
+      return  res.status(200).json(admin);
+    } catch (error) {
+        res.status(500).json({ message: "Server error", error: error.message });
+    }
+}
+
+module.exports = {login, getAdmin};
