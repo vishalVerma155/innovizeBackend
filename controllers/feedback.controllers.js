@@ -2,13 +2,13 @@ const Feedback = require('../models/feedback.model.js');
 
 const createFeedback = async (req, res) => {
     try {
-        const { title, description, userName } = req.body;
+        const { rating, description, userName } = req.body;
 
-        if (title && title.trim() === "" || description && description.trim() === "" || userName && userName.trim() === "") {
+        if ( description && description.trim() === "" || userName && userName.trim() === "") {
             return res.status(400).json({ success: false, error: "All fields are required" });
         }
 
-        const newFeedback = new Feedback({ title, description, userName });
+        const newFeedback = new Feedback({ rating : rating ? rating : 5, description, userName });
         await newFeedback.save();
 
         if (!newFeedback) {

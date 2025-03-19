@@ -77,6 +77,12 @@ router.get("/getVideoLink/:id", getVideoById);
 // get all video link
 router.get("/getAllVideoLinks", getAllVideo);
 
+// delete video link
+router.delete("/deleteVideoLink/:id", deleteVideo);
+
+// edit video link
+router.patch("/updateVideoLink/:id", updateVideoLink);
+
 
 
 module.exports = router;
