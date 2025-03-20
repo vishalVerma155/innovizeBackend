@@ -75,7 +75,7 @@ router.post("/createVideoLink", createVideo);
 router.get("/getVideoLink/:id", getVideoById);
 
 // get all video link
-router.get("/getAllVideoLinks",verifyJWT, getAllVideo);
+router.get("/getAllVideoLinks", getAllVideo);
 
 // delete video link
 router.delete("/deleteVideoLink/:id",verifyJWT, deleteVideo);
