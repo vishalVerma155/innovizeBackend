@@ -34,7 +34,7 @@ router.get("/getAllBlogs", getAllBlog);
 router.get("/getBlog/:id", getBlogById);
 
 // delete blog
-router.delete("/deleteBlog/:id", deleteBlog);
+router.delete("/deleteBlog/:id",verifyJWT, deleteBlog);
 
 
 
@@ -43,13 +43,13 @@ router.delete("/deleteBlog/:id", deleteBlog);
 router.post("/createContectDetails", createContectDetail);
 
 // get all contect details
-router.get("/getAllContectsDetails", getAllContectDetails);
+router.get("/getAllContectsDetails",verifyJWT, getAllContectDetails);
 
 // get contect details
-router.get("/getContectDetails/:id",  getContectDetailById);
+router.get("/getContectDetails/:id", verifyJWT, getContectDetailById);
 
 // delete contect details
-router.delete("/deleteContectDetail/:id", deleteContectDetail);
+router.delete("/deleteContectDetail/:id",verifyJWT, deleteContectDetail);
 
 
 
@@ -64,7 +64,7 @@ router.get('/getAllFeedbacks', getAllFeedback);
 router.get("/getFeedback/:id", getFeedbackById);
 
 // deletefeedback
-router.delete("/deleteFeedback/:id", deleteFeedback);
+router.delete("/deleteFeedback/:id",verifyJWT, deleteFeedback);
 
 
 // VIDEO ROUTES
@@ -75,13 +75,13 @@ router.post("/createVideoLink", createVideo);
 router.get("/getVideoLink/:id", getVideoById);
 
 // get all video link
-router.get("/getAllVideoLinks", getAllVideo);
+router.get("/getAllVideoLinks",verifyJWT, getAllVideo);
 
 // delete video link
-router.delete("/deleteVideoLink/:id", deleteVideo);
+router.delete("/deleteVideoLink/:id",verifyJWT, deleteVideo);
 
 // edit video link
-router.patch("/updateVideoLink/:id", updateVideoLink);
+router.patch("/updateVideoLink/:id",verifyJWT, updateVideoLink);
 
 
 
