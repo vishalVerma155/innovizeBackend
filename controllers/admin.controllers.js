@@ -27,9 +27,9 @@ const login = async(req, res) =>{
     try {
         const { userName, password } = req.body;
 
-        if (!userName || !password) {
-            return res.status(400).json({ message: "All fields are required" });
-        }
+        if(!userName || userName && userName.trim() === "" || !password || password && password.trim() === ""){
+            return res.status(404).json({ success: false , error : "user name or password not found " });
+           }
 
         const admin = await Admin.findOne({ userName });
         if (!admin) {

@@ -4,7 +4,7 @@ const createFeedback = async (req, res) => {
     try {
         const { rating, description, userName } = req.body;
 
-        if ( description && description.trim() === "" || userName && userName.trim() === "") {
+        if ( !description || description && description.trim() === "" || !userName || userName && userName.trim() === "") {
             return res.status(400).json({ success: false, error: "All fields are required" });
         }
 

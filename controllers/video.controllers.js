@@ -4,7 +4,7 @@ const createVideo = async (req, res) => {
     try {
         const { link } = req.body;
 
-        if (link && link.trim() === "") {
+        if (!link || link && link.trim() === "") {
             return res.status(400).json({ success: false, error: "All fields are required" });
         }
 

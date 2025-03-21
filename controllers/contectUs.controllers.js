@@ -4,7 +4,7 @@ const createContectDetail = async (req, res) => {
     try {
         const { fullName, businessName, email, contactNumber, message } = req.body;
 
-        if (!fullName || !message) {
+        if (!fullName || fullName && fullName.trim() === "" || !message || message && message.trim() === "") {
             return res.status(400).json({ success: false, error: "Full name, email and message are required" });
         }
 

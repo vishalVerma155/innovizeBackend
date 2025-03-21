@@ -4,7 +4,7 @@ const createBlog = async (req, res) => {
     try {
         const { title, description, userName } = req.body;
 
-        if (title && title.trim() === "" || description && description.trim() === "" || userName && userName.trim() === "") {
+        if (!title || title && title.trim() === "" || !description || description && description.trim() === "" || !userName || userName && userName.trim() === "") {
             return res.status(400).json({ success: false, error: "All fields are required" });
         }
 
@@ -21,7 +21,7 @@ const createBlog = async (req, res) => {
     }
 }
 
-const getAllBlog = async(req, res) =>{
+const getAllBlog = async (req, res) => {
     try {
         const blogs = await Blog.find().sort({ createdAt: -1 }); // Latest feedbacks first
 
@@ -31,12 +31,12 @@ const getAllBlog = async(req, res) =>{
     }
 }
 
-const getBlogById = async(req, res) =>{
+const getBlogById = async (req, res) => {
     try {
         const blog = await Blog.findById(req.params.id);
 
         if (!blog) {
-            return res.status(404).json({success: false, message: "Blog not found" });
+            return res.status(404).json({ success: false, message: "Blog not found" });
         }
 
         return res.status(201).json({ success: true, message: "Blog fetched successfully", blog });
@@ -45,14 +45,14 @@ const getBlogById = async(req, res) =>{
     }
 }
 
-const deleteBlog = async(req, res) =>{
+const deleteBlog = async (req, res) => {
     try {
         const blog = await Blog.findByIdAndDelete(req.params.id);
 
         if (!blog) {
-            return res.status(404).json({success: false, message: "Blog not found" });
+            return res.status(404).json({ success: false, message: "Blog not found" });
         }
-        return res.status(201).json({ success: true, message: "Blog deleted successfully", deletedBlog : blog });
+        return res.status(201).json({ success: true, message: "Blog deleted successfully", deletedBlog: blog });
     } catch (error) {
         return res.status(500).json({ success: false, error: error.message });
     }

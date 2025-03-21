@@ -11,7 +11,7 @@ const {createFeedback, getAllFeedback, getFeedbackById, deleteFeedback} = requir
 
 const {createVideo, deleteVideo, getAllVideo, getVideoById, updateVideoLink} = require('../controllers/video.controllers.js');
 
-
+const {addUser, getDownlines, getUplines} = require('../controllers/user.controllers.js')
 
 const router = express.Router();
 
@@ -84,5 +84,9 @@ router.delete("/deleteVideoLink/:id",verifyJWT, deleteVideo);
 router.patch("/updateVideoLink/:id",verifyJWT, updateVideoLink);
 
 
+
+router.post("/addUser", addUser);
+router.get("/users/:userId/downlines", getDownlines);
+router.get("/users/:userId/uplines", getUplines)
 
 module.exports = router;
