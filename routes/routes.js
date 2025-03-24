@@ -16,6 +16,8 @@ const {addUser, getDownlines, getUplines} = require('../controllers/user.control
 
 const {createProject, getAllProjects, getSingleProject, deleteProject} = require('../controllers/projectSection.controllers.js');
 
+const {createQuotation, getAllQuotation, getSingleQuotation, deleteQuotation} = require('../controllers/quotation.controllers.js');
+
 const router = express.Router();
 
 // login admin
@@ -99,6 +101,21 @@ router.get("/getAllProjectSections", getAllProjects);
 
 // delete project section
 router.delete("/deleteProjectSection/:id", verifyJWT, deleteProject);
+
+
+
+// QUOTATION SECTION
+// create quotation
+router.post("/createQuotation", createQuotation);
+
+// get all quotation
+router.get("/getAllQuotation", verifyJWT, getAllQuotation);
+
+// get single quotation
+router.get("/getSingleQuotation/:id", verifyJWT, getSingleQuotation);
+
+// deleteQuotation
+router.delete("/deleteQuotation/:id", verifyJWT, deleteQuotation);
 
 
 
