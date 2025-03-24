@@ -1,5 +1,6 @@
 const verifyJWT = require('../middleware/authMiddleware.js');
 const express = require('express');
+const {upload} = require('../utils/multer.js');
 
 const {login, getAdmin} = require('../controllers/admin.controllers.js');
 
@@ -11,7 +12,9 @@ const {createFeedback, getAllFeedback, getFeedbackById, deleteFeedback} = requir
 
 const {createVideo, deleteVideo, getAllVideo, getVideoById, updateVideoLink} = require('../controllers/video.controllers.js');
 
-const {addUser, getDownlines, getUplines} = require('../controllers/user.controllers.js')
+const {addUser, getDownlines, getUplines} = require('../controllers/user.controllers.js');
+
+const {createProject, getAllProjects, getSingleProject, deleteProject} = require('../controllers/projectSection.controllers.js');
 
 const router = express.Router();
 
@@ -82,6 +85,20 @@ router.delete("/deleteVideoLink/:id",verifyJWT, deleteVideo);
 
 // edit video link
 router.patch("/updateVideoLink/:id",verifyJWT, updateVideoLink);
+
+
+// PROJECT SECTION ROUTES
+// create project section
+router.post("/createProjectSection", verifyJWT,upload.single('projectImage'), createProject);
+
+// get single project section
+router.get("/getProjectSection/:id", getSingleProject);
+
+// get all project section
+router.get("/getAllProjectSections", getAllProjects);
+
+// delete project section
+router.delete("/deleteProjectSection/:id", verifyJWT, deleteProject);
 
 
 
