@@ -2,15 +2,15 @@ const Blog = require('../models/blog.model.js');
 
 const createBlog = async (req, res) => {
     try {
-        const { title, description, userName } = req.body;
+        const { title, description } = req.body;
 
-        const image = req.files? req.files.path : undefined;
+        const image = req.file?.path || undefined;;
 
-        if (!title || title && title.trim() === "" || !description || description && description.trim() === "" || !userName || userName && userName.trim() === "") {
+        if (!title || title && title.trim() === "" || !description || description && description.trim() === "") {
             return res.status(400).json({ success: false, error: "All fields are required" });
         }
 
-        const newBlog = new Blog({ title, description, userName, image });
+        const newBlog = new Blog({ title, description, image });
         await newBlog.save();
 
         if (!newBlog) {
