@@ -13,6 +13,9 @@ const projectSectionSchema = new mongoose.Schema({
   image: {
     type: String,
   },
+  projectURL: {
+    type: String,
+  },
   description: {
     type: String,
     trim: true

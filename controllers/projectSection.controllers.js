@@ -4,7 +4,7 @@ const Projects = require('../models/projectSection.model.js');
 const createProject = async (req, res) => {
     try {
 
-        const { heading, subHeading, description } = req.body; // get project data
+        const { heading, subHeading, description, projectURL } = req.body; // get project data
         const image = req.file?.path || undefined; // get image
 
         if (!heading || heading && heading.trim() === "") {
@@ -15,7 +15,8 @@ const createProject = async (req, res) => {
             heading,
             subHeading,
             image,
-            description
+            description,
+            projectURL
         });
 
         await projectSection.save();
