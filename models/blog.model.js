@@ -14,6 +14,10 @@ const blogSchema = new mongoose.Schema({
     date: {
         type: Date,
         default : Date.now()
+    },
+    image: {
+        type: String,
+        trim: true
     }
 }, {timestamps : true});
 

@@ -4,11 +4,13 @@ const createBlog = async (req, res) => {
     try {
         const { title, description, userName } = req.body;
 
+        const image = req.files? req.files.path : undefined;
+
         if (!title || title && title.trim() === "" || !description || description && description.trim() === "" || !userName || userName && userName.trim() === "") {
             return res.status(400).json({ success: false, error: "All fields are required" });
         }
 
-        const newBlog = new Blog({ title, description, userName });
+        const newBlog = new Blog({ title, description, userName, image });
         await newBlog.save();
 
         if (!newBlog) {
