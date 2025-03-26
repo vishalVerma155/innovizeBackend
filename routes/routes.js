@@ -30,7 +30,7 @@ router.get("/getAdmin", verifyJWT, getAdmin);
 
 // BLOGS APIS ROUTES
 // create blogs
-router.post("/createBlog",upload.single('image'), createBlog);
+router.post("/createBlog",upload.single('blogImage'), createBlog);
 
 // get all blogs
 router.get("/getAllBlogs", getAllBlog);

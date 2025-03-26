@@ -4,7 +4,8 @@ const createBlog = async (req, res) => {
     try {
         const { title, description } = req.body;
 
-        const image = req.file?.path || undefined;;
+        const image = req.file?.path || undefined;
+        console.log(image);
 
         if (!title || title && title.trim() === "" || !description || description && description.trim() === "") {
             return res.status(400).json({ success: false, error: "All fields are required" });
