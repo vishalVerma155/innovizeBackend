@@ -91,7 +91,7 @@ router.patch("/updateVideoLink/:id",verifyJWT, updateVideoLink);
 
 // PROJECT SECTION ROUTES
 // create project section
-router.post("/createProjectSection", verifyJWT,upload.single('projectImage'), createProject);
+router.post("/createProjectSection", verifyJWT, upload.single('projectImage'), createProject);
 
 // get single project section
 router.get("/getProjectSection/:id", getSingleProject);
