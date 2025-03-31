@@ -24,14 +24,14 @@ const QuotationSchema = new mongoose.Schema({
     projectDesign: {
         type: String,
     },
-    field1: {
+    serviceName: {
         type: String,
     },
-    field2: {
-        type: String,
+    projectDays: {
+        type: Number,
     },
-    field3: {
-        type: String,
+    projectBudget: {
+        type: Number,
     }
 }, { timestamps: true });
 
