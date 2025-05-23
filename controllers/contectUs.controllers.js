@@ -9,7 +9,7 @@ const createContectDetail = async (req, res) => {
         }
 
         const newContact = new ContactUs({
-            fullName,
+            firstName,
             lastName : lastName ? lastName : undefined,
             businessName: businessName ? businessName : undefined,
             email: email ? email : undefined,
