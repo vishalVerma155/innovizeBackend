@@ -1,9 +1,13 @@
 const mongoose = require("mongoose");
 
 const contactUsSchema = new mongoose.Schema({
-    fullName: {
+    firstName: {
         type: String,
         required: true,
+        trim: true
+    },
+    lastName: {
+        type: String,
         trim: true
     },
     businessName: {
@@ -11,6 +15,14 @@ const contactUsSchema = new mongoose.Schema({
         trim: true
     },
     email: {
+        type: String,
+        trim: true,
+    },
+    country: {
+        type: String,
+        trim: true,
+    },
+    websiteUrl: {
         type: String,
         trim: true,
     },

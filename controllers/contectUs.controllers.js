@@ -2,17 +2,20 @@ const ContactUs = require('../models/contectUs.model.js');
 
 const createContectDetail = async (req, res) => {
     try {
-        const { fullName, businessName, email, contactNumber, message } = req.body;
+        const { firstName,lastName, businessName, email, contactNumber, message, websiteUrl, country } = req.body;
 
-        if (!fullName || fullName && fullName.trim() === "" || !message || message && message.trim() === "") {
-            return res.status(400).json({ success: false, error: "Full name, email and message are required" });
+        if (!firstName || firstName && firstName.trim() === "" || !message || message && message.trim() === "", !country || country && country.trim() === "") {
+            return res.status(400).json({ success: false, error: " name, email, country and message are required" });
         }
 
         const newContact = new ContactUs({
             fullName,
-            businessName: businessName ? businessName : 'undefined',
-            email: email ? email : 'undefined',
-            contactNumber: contactNumber ? contactNumber : 'undefined',
+            lastName : lastName ? lastName : undefined,
+            businessName: businessName ? businessName : undefined,
+            email: email ? email : undefined,
+            websiteUrl : websiteUrl ? websiteUrl : undefined,
+            country,
+            contactNumber: contactNumber ? contactNumber : undefined,
             message
         });
         await newContact.save();
