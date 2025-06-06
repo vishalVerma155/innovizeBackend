@@ -48,6 +48,54 @@ const getBlogById = async (req, res) => {
     }
 }
 
+
+const editBlog = async (req, res) => {
+    try {
+        const { id } = req.params; // Blog ID to edit
+        const { title, description } = req.body;
+        const image = req.file?.path || undefined;
+
+        if (!id) {
+            return res.status(404).json({ success: false, message: "Blog id not found" });
+        }
+        const payload = {}
+
+        if (title && title.trim() !== "") {
+            payload.title = title
+        }
+
+        if (description && description.trim() !== "") {
+            payload.description = description
+        }
+
+        if (image) {
+            payload.image = image
+        }
+
+        
+
+        const updatedBlog = await Blog.findByIdAndUpdate(
+            id,
+            payload,
+            { new: true }
+        );
+
+        if (!updatedBlog) {
+            return res.status(404).json({ success: false, error: "Blog not found or update failed" });
+        }
+
+        return res.status(200).json({
+            success: true,
+            message: "Blog updated successfully",
+            Blog: updatedBlog
+        });
+
+    } catch (error) {
+        return res.status(500).json({ success: false, error: error.message });
+    }
+};
+
+
 const deleteBlog = async (req, res) => {
     try {
         const blog = await Blog.findByIdAndDelete(req.params.id);
@@ -61,4 +109,4 @@ const deleteBlog = async (req, res) => {
     }
 }
 
-module.exports = { createBlog, deleteBlog, getAllBlog, getBlogById };
+module.exports = { createBlog, deleteBlog, getAllBlog, getBlogById, editBlog };

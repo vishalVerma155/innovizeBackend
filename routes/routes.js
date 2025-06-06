@@ -4,7 +4,7 @@ const {upload} = require('../utils/multer.js');
 
 const {login, getAdmin} = require('../controllers/admin.controllers.js');
 
-const {createBlog, deleteBlog, getAllBlog, getBlogById} = require("../controllers/blog.controllers.js");
+const {createBlog, deleteBlog, getAllBlog, getBlogById, editBlog} = require("../controllers/blog.controllers.js");
 
 const {createContectDetail, getAllContectDetails, getContectDetailById, deleteContectDetail} = require('../controllers/contectUs.controllers.js');
 
@@ -40,6 +40,8 @@ router.get("/getBlog/:id", getBlogById);
 
 // delete blog
 router.delete("/deleteBlog/:id",verifyJWT, deleteBlog);
+
+router.patch("/editBlog/:id", verifyJWT,upload.single('blogImage'), editBlog);
 
 
 
